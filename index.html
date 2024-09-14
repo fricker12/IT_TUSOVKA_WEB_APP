@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Telegram Web App</title>
+</head>
+<body>
+
+	<div class="container">
+		<div class="inner">
+			<div class="item" id="item">
+				<a href="https://spotify-github-profile.kittinanx.com/api/view.svg?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=000000&interchange=false&bar_color=53b14f&bar_color_cover=true">
+					<img id="profileImg" src="https://spotify-github-profile.kittinanx.com/api/view.svg?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=000000&interchange=false&bar_color=53b14f&bar_color_cover=true" alt="Spotify Profile">
+				</a>
+
+				<!-- Спойлер с недавно проигранными треками -->
+				<details id="recentlyPlayedDetails">
+					<summary>Recently Played</summary>
+					<a href="https://open.spotify.com/user/21f6yy7o4zdnzdffahkzebd6i">
+						<img id="recentlyPlayedImg" src="https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i&unique=true&count=10" alt="Spotify Recently Played">
+					</a>
+				</details>
+
+				<!-- Кнопка для отображения спойлера -->
+				<button class="btn" id="btn">Показать Recently Played</button>
+
+				<!-- Поле ввода ссылки и кнопка отправки -->
+				<div class="input-section">
+					<input type="text" id="linkInput" placeholder="Введите ссылку" style="width: 70%;">
+					<button class="btn" id="sendLinkBtn" style="width: 25%;">Отправить</button>
+				</div>
+
+				<!-- Блок для отображения результата -->
+				<div id="resultBlock" style="margin-top: 20px;">
+					<p>Результат обработки будет показан здесь</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+	<script>
+		// Функция для обновления содержимого блока
+		function updateContent() {
+			// Обновление изображения профиля
+			const profileImg = document.getElementById('profileImg');
+			profileImg.src = "https://spotify-github-profile.kittinanx.com/api/view.svg?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=000000&interchange=false&bar_color=53b14f&bar_color_cover=true&" + new Date().getTime();
+
+			// Обновление недавно проигранных треков
+			const recentlyPlayedImg = document.getElementById('recentlyPlayedImg');
+			recentlyPlayedImg.src = "https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i&unique=true&count=10&" + new Date().getTime();
+		}
+
+		// Устанавливаем интервал на 15 секунд (15000 миллисекунд)
+		setInterval(updateContent, 15000);
+
+		// Обработчик для кнопки показа недавно проигранных треков
+		document.getElementById('btn').addEventListener('click', function() {
+			const details = document.getElementById('recentlyPlayedDetails');
+			if (!details.open) {
+				details.open = true; // Открыть спойлер
+				this.textContent = 'Скрыть Recently Played'; // Изменить текст кнопки
+			} else {
+				details.open = false; // Закрыть спойлер
+				this.textContent = 'Показать Recently Played'; // Изменить текст кнопки
+			}
+		});
+
+		// Обработчик для отправки ссылки
+		document.getElementById('sendLinkBtn').addEventListener('click', function() {
+			const linkInput = document.getElementById('linkInput').value;
+
+			// Проверка на пустую ссылку
+			if (linkInput.trim() === '') {
+				alert('Введите ссылку');
+				return;
+			}
+
+			// Отправка ссылки через Telegram Web App
+			//Telegram.WebApp.sendData(linkInput);
+
+			// Имитация ответа бота для отображения результата
+			// Предположим, что бот вернул изображение или ссылку
+			setTimeout(function() {
+				const resultBlock = document.getElementById('resultBlock');
+
+				// Пример обработки: если ссылка ведет на изображение
+				if (linkInput.endsWith('.jpg') || linkInput.endsWith('.png') || linkInput.endsWith('.gif')) {
+					resultBlock.innerHTML = `<img src="${linkInput}" alt="Image" style="max-width: 100%;">`;
+				}
+				// Пример обработки: если ссылка ведет на видео
+				else if (linkInput.endsWith('.mp4')) {
+					resultBlock.innerHTML = `<video controls style="max-width: 100%;"><source src="${linkInput}" type="video/mp4">Ваш браузер не поддерживает видео.</video>`;
+				}
+				// Пример обработки: если это веб-ссылка
+				else {
+					resultBlock.innerHTML = `<a href="${linkInput}" target="_blank">${linkInput}</a>`;
+				}
+			}, 1000); // имитация задержки на ответ от бота
+		});
+	</script>
+</body>
+</html>
