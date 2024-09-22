@@ -1,77 +1,107 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
 	<title>Telegram Web App</title>
+	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-
 	<div class="container">
-		<div class="inner">
-			<div class="item" id="item">
-				<a href="https://spotify-github-profile.kittinanx.com/api/view.svg?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=000000&interchange=false&bar_color=53b14f&bar_color_cover=true">
-					<img id="profileImg" src="https://spotify-github-profile.kittinanx.com/api/view.svg?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=000000&interchange=false&bar_color=53b14f&bar_color_cover=true" alt="Spotify Profile">
-				</a>
-				<!-- Поле ввода ссылки и кнопка отправки -->
-				<div class="input-section">
-					<input type="text" id="linkInput" placeholder="Введите ссылку" style="width: 70%;">
-					<button class="btn" id="sendLinkBtn" style="width: 25%;">Отправить</button>
-				</div>
+		<h1 class="title" id="usercard"></h1>
+		<h2 class="title">Адмін зараз слухає на Spotify</h2>
+		<a href="https://spotify-github-profile.kittinanx.com/api/view?uid=21f6yy7o4zdnzdffahkzebd6i&redirect=true">
+			<img id="profileImg" src="https://spotify-github-profile.kittinanx.com/api/view?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=121212&interchange=false&bar_color=53b14f&bar_color_cover=false" alt="Spotify Profile">
+		</a>
+		<details>
+			<summary class="title">Останнє прослухане</summary>
+			<a href="https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i">
+				<img id="recentlyPlayedImg" src="https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i&unique=true&count=10&width=500" alt="Spotify recently played">
+			</a>
+		</details>
+		<details>
+			<summary class="title">Карта повітрянної тривоги</summary>
+			<iframe id="alertsIframe" src="https://alerts.in.ua" width="390" height="500" style="border: none;"></iframe>
+		</details>
 
-				<!-- Блок для отображения результата -->
-				<div id="resultBlock" style="margin-top: 20px;">
-					<p>Результат обработки будет показан здесь</p>
+		<details>
+			<summary class="title">Бан користувачів</summary>
+			<div class="inner">
+				<div class="item">
+					<img src="1.png" alt="Бойко" class="img">
+					<p class="description">Бойко</p>
+					<button class="btn" id="btn1">Забанить</button>
+				</div>
+				<div class="item">
+					<img src="1.png" alt="Бобровский" class="img">
+					<p class="description">Бобровский</p>
+					<button class="btn" id="btn2">Забанить</button>
+				</div>
+				<div class="item">
+					<img src="1.png" alt="Шамрай" class="img">
+					<p class="description">Шамрай</p>
+					<button class="btn" id="btn3">Забанить</button>
+				</div>
+				<div class="item">
+					<img src="1.png" alt="Ткаченко" class="img">
+					<p class="description">Ткаченко</p>
+					<button class="btn" id="btn4">Забанить</button>
+				</div>
+				<div class="item">
+					<img src="1.png" alt="Суворов" class="img">
+					<p class="description">Суворов</p>
+					<button class="btn" id="btn5">Забанить</button>
+				</div>
+				<div class="item">
+					<img src="1.png" alt="Твай" class="img">
+					<p class="description">Твай</p>
+					<button class="btn" id="btn6">Забанить</button>
+				</div>
+				<div class="item">
+					<img src="1.png" alt="Кравец" class="img">
+					<p class="description">Кравец</p>
+					<button class="btn" id="btn7">Забанить</button>
+				</div>
+				<div class="item">
+					<img src="1.png" alt="Pavlo" class="img">
+					<p class="description">Pavlo</p>
+					<button class="btn" id="btn8">Забанить</button>
 				</div>
 			</div>
-		</div>
+		</details>
 	</div>
-
-	<script src="https://telegram.org/js/telegram-web-app.js"></script>
+	<script src="app.js"></script>
+	<!-- Скрипт для Telegram SDK -->
 	<script>
-		// Функция для обновления содержимого блока
-		function updateContent() {
-			// Обновление изображения профиля
-			const profileImg = document.getElementById('profileImg');
-			profileImg.src = "https://spotify-github-profile.kittinanx.com/api/view.svg?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=000000&interchange=false&bar_color=53b14f&bar_color_cover=true&" + new Date().getTime();
-		}
-
-		// Устанавливаем интервал на 15 секунд (15000 миллисекунд)
-		setInterval(updateContent, 15000);
-
-		// Обработчик для отправки ссылки
-		document.getElementById('sendLinkBtn').addEventListener('click', function() {
-			const linkInput = document.getElementById('linkInput').value;
-
-			// Проверка на пустую ссылку
-			if (linkInput.trim() === '') {
-				alert('Введите ссылку');
-				return;
+		window.onload = function() {
+			window.Telegram.WebApp.ready();
+			const user = window.Telegram.WebApp.initDataUnsafe?.user;
+			if (user) {
+				document.getElementById('usercard').innerText = `Привіт, ${user.first_name} ${user.last_name} Premium(${user.is_premium})`;
+			} else {
+				document.getElementById('usercard').innerText = 'Пользователь не авторизован';
 			}
-
-			// Отправка ссылки через Telegram Web App
-			//Telegram.WebApp.sendData(linkInput);
-
-			// Имитация ответа бота для отображения результата
-			// Предположим, что бот вернул изображение или ссылку
-			setTimeout(function() {
-				const resultBlock = document.getElementById('resultBlock');
-
-				// Пример обработки: если ссылка ведет на изображение
-				if (linkInput.endsWith('.jpg') || linkInput.endsWith('.png') || linkInput.endsWith('.gif')) {
-					resultBlock.innerHTML = `<img src="${linkInput}" alt="Image" style="max-width: 100%;">`;
-				}
-				// Пример обработки: если ссылка ведет на видео
-				else if (linkInput.endsWith('.mp4')) {
-					resultBlock.innerHTML = `<video controls style="max-width: 100%;"><source src="${linkInput}" type="video/mp4">Ваш браузер не поддерживает видео.</video>`;
-				}
-				// Пример обработки: если это веб-ссылка
-				else {
-					resultBlock.innerHTML = `<a href="${linkInput}" target="_blank">${linkInput}</a>`;
-				}
-			}, 1000); // имитация задержки на ответ от бота
-		});
+		};
+	</script>
+	<!-- Скрипт для обновления содержимого -->
+    <script>
+	function updateContent() {
+		const profileImg = document.getElementById('profileImg');
+		profileImg.src = "https://spotify-github-profile.kittinanx.com/api/view?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=121212&interchange=false&bar_color=53b14f&bar_color_cover=false&" + new Date().getTime();
+		const recentlyPlayedImg = document.getElementById('recentlyPlayedImg');
+		recentlyPlayedImg.src = "https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i&unique=true&count=10&width=500&" + new Date().getTime();
+		}
+		setInterval(updateContent, 15000);
+		</script>
+	<script>
+		// Функция для обновления карты тревог
+		function updateAlertIframe() {
+			const alertsIframe = document.getElementById('alertsIframe');
+			alertsIframe.src = "https://alerts.in.ua?time=" + new Date().getTime();
+		}
+		// Обновление iframe каждые 3 минуты
+		setInterval(updateAlertIframe, 180000);
 	</script>
 </body>
 </html>

@@ -2,39 +2,152 @@ body {
 	margin: 0;
 	padding: 0;
 	font-size: 18px;
-	color: black;
-	background: white;
+	color: var(--tg-theme-text-color);
+	background: rgb(33, 33, 33);
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
-	max-width: 390px;
+	background: linear-gradient(135deg, rgb(33, 33, 33),rgb(33, 33, 33)); /* Градиентный фон */
+	border-radius: 15px;
+	animation: fadeIn 1s ease-in-out; /* Плавная анимация появления */
+	text-align: center; /* Центрирование содержимого */
+	max-width: 100%; /* Ограничиваем ширину контейнера на 100% относительно родителя */
+	width: 500px; /* Явно устанавливаем ширину контейнера */
+	margin: 0 auto; /* Центрирование контейнера */
+	padding: 1px; /* Отступы для визуальной эстетики */
+	box-sizing: border-box; /* Учитываем отступы и границы в ширине */
 }
 
+
+details {
+	max-width: 100%; /* Устанавливаем, чтобы <details> подстраивался под родительский контейнер */
+	overflow: hidden; /* Обрезаем содержимое, выходящее за пределы */
+	box-sizing: border-box; /* Учитываем отступы и границы */
+}
+
+details img {
+	width: 100%; /* Ограничиваем изображение внутри details по ширине контейнера */
+	height: auto; /* Сохраняем пропорции */
+}
+
+/* Заголовок для надписи */
+.title {
+	font-size: 12px;
+	color: white;
+	margin-bottom: 10px;
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Легкая тень для текста */
+}
+
+.greeting-message {
+    font-size: 12px;
+    color: white;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;  /* Центрирование текста */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Легкая тень для текста */
+    width: 100%;  /* Это гарантирует, что элемент занимает всю ширину */
+    max-width: 600px;  /* Ограничение ширины */
+}
+/* Анимация плавного появления */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
 .inner {
+	width: 100%; /* Ширина inner для полного использования доступного пространства */
+	max-width: 500px; /* Ограничиваем максимальную ширину */
+	margin: 0 auto; /* Центрирование */
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 200px 200px 200px;
+	grid-template-rows: 100px 100px 100px;
+	grid-gap: 20px; /* Отступы между элементами */
+	background-color: rgb(33, 33, 33); /* Фон inner */
+	padding: 20px; /* Внутренний отступ */
+	border-radius: 8px; /* Закругленные углы */
+	box-sizing: border-box; /* Учитываем отступы и границы */
 }
 
 .item {
 	text-align: center;
-	border: 10px black;
-	border-radius: 1%;
-	background-color: rgb(245, 245, 245);
+	background-color: rgb(33, 33, 33); /* Белый фон для item */
+	border-radius: 8px;
+	padding: 10px; /* Внутренний отступ */
+
+}
+
+.input-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.description {
+	margin-top: 10px;
+	font-size: 16px;
+	color: #ffffff; /* Цвет текста для описания */
+}
+
+.img {
+	width: 20px; /* Устанавливаем ширину изображения */
+	height: auto; /* Автоматическая высота для сохранения пропорций */
+	display: block;
+	margin: 0 auto; /* Центрирование изображения */
+}
+
+.input-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#linkInput {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+#linkInput:focus {
+    border-color: rgb(24, 248, 99);
+    outline: none;
 }
 
 .btn {
-	display: inline-block;
-	padding: 10px 20px;
+	margin-top: 10px;
+	padding: 10px 15px;
 	border: none;
-	background: rgb(248, 168, 24);
-	border-radius: 10px;
-	color: wheat;
+	background: rgba(252, 196, 43, 0.986);
+	border-radius: 8px;
+	color: rgb(0, 0, 0);
 	text-transform: uppercase;
 	font-weight: 700;
-	transition: background .2s linear;
+	cursor: pointer;
+	transition: background 0.3s ease;
 }
 
 .btn:hover {
-	background: rgb(245, 245, 245);
+	background: rgb(70, 219, 40);
+}
+
+.btn:active {
+	background: #cccccc;
 }
