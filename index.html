@@ -17,7 +17,13 @@
 		<details>
 			<summary class="title">Останнє прослухане</summary>
 			<a href="https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i">
-				<img id="recentlyPlayedImg" src="https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i&unique=true&count=10&width=500" alt="Spotify recently played">
+				<img id="recentlyPlayedImg" src="https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i&unique=true&count=10&width=500&border_radius=0" alt="Spotify recently played">
+			</a>
+		</details>
+		<details>
+			<summary class="title">Last FM</summary>
+			<a href="https://lastfm-recently-played.vercel.app/api?user=fricker12">
+				<img id="recentlyPlayedImgLastFM" src="https://lastfm-recently-played.vercel.app/api?user=fricker12&show_user=header&header_style=normal_stats&footer_style=compact_stats&loved=true&loved_style=2&count=5&width=500" alt="LastFM recently played">
 			</a>
 		</details>
 		<details>
@@ -90,7 +96,9 @@
 		const profileImg = document.getElementById('profileImg');
 		profileImg.src = "https://spotify-github-profile.kittinanx.com/api/view?uid=21f6yy7o4zdnzdffahkzebd6i&cover_image=true&theme=novatorem&show_offline=true&background_color=121212&interchange=false&bar_color=53b14f&bar_color_cover=false&" + new Date().getTime();
 		const recentlyPlayedImg = document.getElementById('recentlyPlayedImg');
-		recentlyPlayedImg.src = "https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i&unique=true&count=10&width=500&" + new Date().getTime();
+		recentlyPlayedImg.src = "https://spotify-recently-played-readme.vercel.app/api?user=21f6yy7o4zdnzdffahkzebd6i&unique=true&count=10&width=500&border_radius=0&" + new Date().getTime();
+		const recentlyPlayedImgLastFM = document.getElementById('recentlyPlayedImgLastFM');
+		recentlyPlayedImgLastFM.src = "https://lastfm-recently-played.vercel.app/api?user=fricker12&show_user=header&header_style=normal_stats&footer_style=compact_stats&loved=true&loved_style=2&count=5&width=500&" + new Date().getTime();
 		}
 		setInterval(updateContent, 15000);
 		</script>
